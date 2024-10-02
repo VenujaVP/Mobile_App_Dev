@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="don_t_have_an_account_register_here">Don’t have an account? Register here</string>
+    <string name="register">Register</string>
+    <string name="default_web_client_id">683428060061-ifms0f0ak7e1qi0hv3pjja0n0okdnebs.apps.googleusercontent.com</string>
+    <string name="recipe_image">Recipe Image</string> <!-- Add this line -->
+    <!-- Add other string resources here -->
+
+</resources>
+

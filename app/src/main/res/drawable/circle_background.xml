@@ -1,0 +1,4 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@android:color/transparent" /> <!-- Optional: Transparent background -->
+    <corners android:radius="50dp" /> <!-- Adjust radius to half of the view's size -->
+</shape>

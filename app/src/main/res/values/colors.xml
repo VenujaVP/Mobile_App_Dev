@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#FFFFFF</color>
+    <color name="colorAccent">#03DAC5</color>
+
+    <!-- Custom Colors -->
+    <color name="homeIcon">#FFFFFFFF</color> <!-- Example orange color -->
+    <color name="categoryIconColor">#FFFFFFFF</color> <!-- Example green color -->
+    <color name="profileIcon">#FFFFFFFF</color> <!-- Example blue color -->
+    <color name="baseline_camera_al_24">#FFFFFFFF</color> <!-- Example blue color -->
+</resources>

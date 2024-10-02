@@ -10,12 +10,13 @@
 
     <Button
         android:id="@+id/Get"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="374dp"
+        android:layout_height="57dp"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="136dp"
         android:backgroundTint="#FF0000"
-        android:text="Getstart"
+        android:text="Get Started"
+        android:textSize="18sp"
         android:textColorLink="#C82323"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

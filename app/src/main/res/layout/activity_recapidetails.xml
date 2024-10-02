@@ -14,7 +14,7 @@
         android:textSize="28sp"
         android:textStyle="bold"
         android:textColor="@android:color/holo_blue_dark"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="8dp" />
 
     <!-- Cooking Time -->
     <TextView
@@ -23,7 +23,16 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textColor="@android:color/darker_gray"
-        android:layout_marginBottom="12dp"/>
+        android:layout_marginBottom="12dp" />
+
+    <!-- ExoPlayer View -->
+    <!-- ExoPlayer View using media3 -->
+    <androidx.media3.ui.PlayerView
+        android:id="@+id/playerView"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp" />
 
     <!-- Ingredients Header -->
     <TextView
@@ -32,7 +41,7 @@
         android:text="Ingredients"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_marginBottom="4dp"/>
+        android:layout_marginBottom="4dp" />
 
     <!-- Ingredients List -->
     <TextView
@@ -42,7 +51,7 @@
         android:textSize="16sp"
         android:background="@android:color/background_light"
         android:padding="8dp"
-        android:layout_marginBottom="12dp"/>
+        android:layout_marginBottom="12dp" />
 
     <!-- Instructions Header -->
     <TextView
@@ -51,7 +60,7 @@
         android:text="Instructions"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_marginBottom="4dp"/>
+        android:layout_marginBottom="4dp" />
 
     <!-- Instructions List -->
     <TextView
@@ -61,15 +70,8 @@
         android:textSize="16sp"
         android:background="@android:color/background_light"
         android:padding="8dp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp" />
 
-    <!-- Video View -->
-    <VideoView
-        android:id="@+id/recipeVideoView"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp" />
 
     <!-- Buttons for Edit and Delete -->
     <Button
@@ -77,7 +79,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Edit Recipe"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp" />
 
     <Button
         android:id="@+id/buttonDelete"
@@ -86,5 +88,5 @@
         android:text="Delete Recipe"
         android:layout_marginTop="8dp"
         android:backgroundTint="@android:color/holo_red_dark"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white" />
 </LinearLayout>

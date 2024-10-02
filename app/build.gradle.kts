@@ -46,10 +46,13 @@ dependencies {
 
     // Glide for image loading
     implementation("com.github.bumptech.glide:glide:4.15.1")
+    implementation(libs.media3.exoplayer)
     annotationProcessor("com.github.bumptech.glide:compiler:4.15.1") // Use annotationProcessor for Java
 
     // Google Play Services for authentication
     implementation("com.google.android.gms:play-services-auth:20.3.0")
+    implementation("androidx.media3:media3-exoplayer-dash:1.3.1")
+    implementation ("androidx.media3:media3-ui:1.3.1")
 
 
     // Test dependencies

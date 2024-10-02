@@ -7,15 +7,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import androidx.media3.common.MediaItem;
+import androidx.media3.exoplayer.ExoPlayer;
+import androidx.media3.ui.PlayerView;
 
 import java.util.ArrayList;
 
@@ -25,7 +30,8 @@ public class Recapidetails extends AppCompatActivity {
     private TextView recipeCookingTimeText;
     private TextView recipeIngredientsText;
     private TextView recipeInstructionsText;
-    private VideoView recipeVideoView;  // VideoView for displaying the video
+    private PlayerView playerView;  // ExoPlayer's PlayerView
+    private ExoPlayer exoPlayer;    // ExoPlayer instance
 
     private DatabaseReference mDatabase;
     private String recipeId; // Store recipeId for later use
@@ -40,7 +46,7 @@ public class Recapidetails extends AppCompatActivity {
         recipeCookingTimeText = findViewById(R.id.recipeCookingTimeText);
         recipeIngredientsText = findViewById(R.id.recipeIngredientsText);
         recipeInstructionsText = findViewById(R.id.recipeInstructionsText);
-        recipeVideoView = findViewById(R.id.recipeVideoView); // Initialize the VideoView
+        playerView = findViewById(R.id.playerView); // Initialize PlayerView
 
         // Get the recipe ID from the intent
         recipeId = getIntent().getStringExtra("recipeId");
@@ -108,11 +114,15 @@ public class Recapidetails extends AppCompatActivity {
                     recipeIngredientsText.setText(String.join(", ", ingredients));
                     recipeInstructionsText.setText(String.join("\n", instructions));
 
-                    // Set video to VideoView
+                    // Set video to ExoPlayer's PlayerView
                     if (videoUrl != null) {
-                        Uri videoUri = Uri.parse(videoUrl);
-                        recipeVideoView.setVideoURI(videoUri);
-                        recipeVideoView.start();  // Start video playback
+                        // Initialize ExoPlayer and set the video
+                        exoPlayer = new ExoPlayer.Builder(Recapidetails.this).build();
+                        playerView.setPlayer(exoPlayer);
+                        MediaItem mediaItem = MediaItem.fromUri(Uri.parse(videoUrl));
+                        exoPlayer.setMediaItem(mediaItem);
+                        exoPlayer.prepare();
+                        exoPlayer.play();
                     }
                 } else {
                     Toast.makeText(Recapidetails.this, "Recipe not found", Toast.LENGTH_SHORT).show();
@@ -135,5 +145,15 @@ public class Recapidetails extends AppCompatActivity {
                 Toast.makeText(Recapidetails.this, "Failed to delete recipe", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Release ExoPlayer when done
+        if (exoPlayer != null) {
+            exoPlayer.release();
+            exoPlayer = null;
+        }
     }
 }

@@ -26,17 +26,17 @@
 
         <ImageView
             android:id="@+id/profileImage"
-            android:layout_width="124dp"
-            android:layout_height="119dp"
+            android:layout_width="96dp"
+            android:layout_height="94dp"
             android:background="@drawable/circle_background"
             android:contentDescription="Profile Picture"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.056"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.538" />
+            app:layout_constraintVertical_bias="0.64" />
 
         <Button
             android:id="@+id/uploadButton"

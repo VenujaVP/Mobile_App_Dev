@@ -39,5 +39,17 @@
         app:layout_constraintTop_toTopOf="@+id/recipeImage"
         app:layout_constraintVertical_bias="1.0" />
 
+    <ImageView
+        android:id="@+id/favourite"
+        android:layout_width="32dp"
+        android:layout_height="33dp"
+        android:src="@drawable/baseline_favorite_24"
+        app:layout_constraintBottom_toBottomOf="@+id/recipeImage"
+        app:layout_constraintEnd_toEndOf="@+id/recipeImage"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/recipeImage"
+        app:layout_constraintTop_toTopOf="@+id/recipeImage"
+        app:layout_constraintVertical_bias="0.0"
+        app:tint="#C82323" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

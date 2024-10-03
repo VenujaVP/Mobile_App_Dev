@@ -147,7 +147,13 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/recipeInstructionsText"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:numStars="5"
+        android:rating="3"
+        android:progressTint="#FFD700"
+        android:stepSize="1"
+        android:progressBackgroundTint="@color/white"
+        />
 
     <LinearLayout
         android:id="@+id/linearLayout"

@@ -1,74 +1,108 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class RatingPage extends AppCompatActivity {
 
     private RatingBar ratingBar;
     private TextView ratingScale;
-    private Button button;  // Added button declaration
+    private Button button;
+    private DatabaseReference ratingsDatabase;
+    private String recipeId;
+    private String currentUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_rating_page);
 
         ratingBar = findViewById(R.id.ratingBar2);
         ratingScale = findViewById(R.id.textView4);
         button = findViewById(R.id.button2);
 
-        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                ratingScale.setText(String.valueOf(rating));
+        // Get current user ID and recipe ID from intent
+        currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        recipeId = getIntent().getStringExtra("recipeId");
 
-                switch ((int) ratingBar.getRating()) {
-                    case 1:
-                        ratingScale.setText("Very Bad");
-                        break;
-                    case 2:
-                        ratingScale.setText("Bad");
-                        break;
-                    case 3:
-                        ratingScale.setText("Good");
-                        break;
-                    case 4:
-                        ratingScale.setText("Great");
-                        break;
-                    case 5:
-                        ratingScale.setText("Awesome");
-                        break;
-                    default:
-                        ratingScale.setText("");
-                        break;
+        // Initialize Firebase reference to the ratings node
+        ratingsDatabase = FirebaseDatabase.getInstance().getReference("recipes").child(recipeId).child("ratings");
+
+        // Check if the user has already rated this recipe
+        fetchUserRating();
+
+        ratingBar.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
+            switch ((int) ratingBar.getRating()) {
+                case 1:
+                    ratingScale.setText("Very Bad");
+                    break;
+                case 2:
+                    ratingScale.setText("Bad");
+                    break;
+                case 3:
+                    ratingScale.setText("Good");
+                    break;
+                case 4:
+                    ratingScale.setText("Great");
+                    break;
+                case 5:
+                    ratingScale.setText("Awesome");
+                    break;
+                default:
+                    ratingScale.setText("");
+                    break;
+            }
+        });
+
+        // Save or update rating
+        button.setOnClickListener(v -> {
+            float userRating = ratingBar.getRating();
+            saveOrUpdateRating(userRating);
+        });
+    }
+
+    // Method to check if the user has already rated
+    private void fetchUserRating() {
+        ratingsDatabase.child(currentUserId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    // User has already rated, load the rating
+                    Float existingRating = dataSnapshot.getValue(Float.class);
+                    if (existingRating != null) {
+                        ratingBar.setRating(existingRating);
+                    }
                 }
             }
-        });
 
-        button.setOnClickListener(new View.OnClickListener() {  // Corrected View.OnClickListener implementation
             @Override
-            public void onClick(View view) {
-                String message = String.valueOf(ratingBar.getRating());
-                Toast.makeText(RatingPage.this, "Rating is: " + message, Toast.LENGTH_SHORT).show();  // Corrected class name for Toast
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(RatingPage.this, "Failed to load rating", Toast.LENGTH_SHORT).show();
             }
         });
+    }
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+    // Method to save or update the user's rating in Firebase
+    private void saveOrUpdateRating(float rating) {
+        ratingsDatabase.child(currentUserId).setValue(rating).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Toast.makeText(RatingPage.this, "Rating saved", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(RatingPage.this, "Failed to save rating", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 }

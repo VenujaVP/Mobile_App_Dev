@@ -27,7 +27,7 @@ import java.util.ArrayList;
 
 public class Recapidetails extends AppCompatActivity {
 
-    private TextView recipeNameText, recipeCookingTimeText, recipeIngredientsText, recipeInstructionsText;
+    private TextView recipeNameText, recipeCookingTimeText, recipeIngredientsText, recipeInstructionsText,ratingHere;
     private PlayerView playerView;
     private ExoPlayer player;
     private DatabaseReference mDatabase;
@@ -47,6 +47,7 @@ public class Recapidetails extends AppCompatActivity {
 
         // Initialize views
         recipeNameText = findViewById(R.id.recipeNameText);
+        ratingHere = findViewById(R.id.ratingHere);
         recipeCookingTimeText = findViewById(R.id.recipeCookingTimeText);
         recipeIngredientsText = findViewById(R.id.recipeIngredientsText);
         recipeInstructionsText = findViewById(R.id.recipeInstructionsText);
@@ -74,6 +75,10 @@ public class Recapidetails extends AppCompatActivity {
             Intent intent = new Intent(Recapidetails.this, EditRecipeActivity.class);
             intent.putExtra("recipeId", recipeId);
             startActivity(intent);
+        });
+
+        ratingHere.setOnClickListener(v -> {
+            startActivity(new Intent(Recapidetails.this, RatingPage.class));
         });
 
         // Set up click listener for the delete button

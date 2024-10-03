@@ -31,6 +31,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Ingredients -->
+
+    <androidx.media3.ui.PlayerView
+        android:id="@+id/detailVideo"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        app:layout_constraintTop_toBottomOf="@+id/recipeNameText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        app:use_controller="true" />
+
     <TextView
         android:id="@+id/recipeCookingTimeText"
         android:layout_width="wrap_content"
@@ -40,7 +51,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recipeNameText" />
+        app:layout_constraintTop_toBottomOf="@+id/detailVideo" />
 
     <!-- Instructions -->
     <TextView
@@ -66,15 +77,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recipeIngredientsText" />
 
-    <androidx.media3.ui.PlayerView
-        android:id="@+id/detailVideo"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        app:layout_constraintTop_toBottomOf="@+id/recipeInstructionsText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        app:use_controller="true" />
 
     <!-- Edit and Delete Buttons (in LinearLayout) -->
     <LinearLayout
@@ -82,7 +84,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/detailVideo"
+        app:layout_constraintTop_toBottomOf="@+id/recipeInstructionsText"
         app:layout_constraintEnd_toEndOf="parent">
 
         <Button

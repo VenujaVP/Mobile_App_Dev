@@ -8,13 +8,14 @@
 
     <ImageView
         android:id="@+id/recipeImage"
-        android:layout_width="0dp"
-        android:layout_height="150dp"
+        android:layout_width="393dp"
+        android:layout_height="197dp"
         android:contentDescription="@string/recipe_image"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <TextView
         android:id="@+id/recipeName"
@@ -50,6 +51,7 @@
         app:layout_constraintStart_toStartOf="@+id/recipeImage"
         app:layout_constraintTop_toTopOf="@+id/recipeImage"
         app:layout_constraintVertical_bias="0.0"
+        android:layout_marginRight="10dp"
         app:tint="#C82323" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

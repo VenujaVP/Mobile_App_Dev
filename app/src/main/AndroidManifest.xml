@@ -22,7 +22,9 @@
             android:exported="false" />
         <activity
             android:name=".EditRecipeActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.Material3.Light.NoActionBar" />
+
         <activity
             android:name=".Getstart"
             android:exported="false"
@@ -57,10 +59,7 @@
             android:name=".ForgetPassword"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity
-            android:name=".ForgotPassword"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
         <activity
             android:name=".register"
             android:exported="false"

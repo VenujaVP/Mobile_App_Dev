@@ -22,8 +22,8 @@
             android:id="@+id/uploadImageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="#FF0000"
             android:layout_marginBottom="10dp"
-            android:background="#000000"
             android:text="Upload Recipe Image" />
 
         <!-- Recipe Name Input -->
@@ -71,6 +71,7 @@
             android:id="@+id/uploadVideoButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="#FF0000"
             android:text="Upload Recipe Video"
             android:layout_marginBottom="10dp"/>
 
@@ -102,6 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add Another Ingredient"
+            android:backgroundTint="#FF0000"
             android:layout_marginBottom="10dp"/>
 
         <!-- Instructions Container -->
@@ -115,12 +117,14 @@
             <EditText
                 android:id="@+id/instructionStep1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:hint="Enter step 1"
                 android:inputType="textMultiLine"
+                android:paddingLeft="12dp"
+                android:background="@drawable/rounded_edittext"
+                android:layout_height="65dp"
                 android:minLines="3"
                 android:textColor="@color/white"
-                android:textColorHint="@color/white"
+                android:textColorHint="@color/black"
                 android:layout_marginBottom="10dp"/>
 
         </LinearLayout>
@@ -131,6 +135,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add Another Step"
+            android:backgroundTint="#FF0000"
             android:layout_marginBottom="10dp"/>
 
         <!-- Submit Button -->
@@ -138,6 +143,9 @@
             android:id="@+id/submitRecipeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="#FF0000"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="125dp"
             android:text="Submit Recipe"/>
 
     </LinearLayout>

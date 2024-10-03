@@ -3,8 +3,8 @@ package com.example.myapplication;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,41 +12,48 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.media3.common.MediaItem; // Updated import for MediaItem
+import androidx.media3.exoplayer.ExoPlayer; // Updated import for ExoPlayer
+import androidx.media3.ui.PlayerView; // Updated import for PlayerView
+
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import androidx.media3.common.MediaItem;
-import androidx.media3.exoplayer.ExoPlayer;
-import androidx.media3.ui.PlayerView;
-
 import java.util.ArrayList;
 
 public class Recapidetails extends AppCompatActivity {
 
-    private TextView recipeNameText;
-    private TextView recipeCookingTimeText;
-    private TextView recipeIngredientsText;
-    private TextView recipeInstructionsText;
-    private PlayerView playerView;  // ExoPlayer's PlayerView
-    private ExoPlayer exoPlayer;    // ExoPlayer instance
-
+    private TextView recipeNameText, recipeCookingTimeText, recipeIngredientsText, recipeInstructionsText;
+    private PlayerView playerView;
+    private ExoPlayer player;
     private DatabaseReference mDatabase;
-    private String recipeId; // Store recipeId for later use
+    private String recipeId;
+    private Button buttonEdit, buttonDelete;
+    private ImageView shareButton;
+    private String currentUserId;
+    private String videoUrl; // For sharing the video URL
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recapidetails);
 
+        // Initialize Firebase Auth and get current user ID
+        currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
         // Initialize views
         recipeNameText = findViewById(R.id.recipeNameText);
         recipeCookingTimeText = findViewById(R.id.recipeCookingTimeText);
         recipeIngredientsText = findViewById(R.id.recipeIngredientsText);
         recipeInstructionsText = findViewById(R.id.recipeInstructionsText);
-        playerView = findViewById(R.id.playerView); // Initialize PlayerView
+        playerView = findViewById(R.id.detailVideo);
+        buttonEdit = findViewById(R.id.buttonEdit);
+        buttonDelete = findViewById(R.id.buttonDelete);
+        shareButton = findViewById(R.id.shareButton); // Initialize the share button
 
         // Get the recipe ID from the intent
         recipeId = getIntent().getStringExtra("recipeId");
@@ -57,29 +64,23 @@ public class Recapidetails extends AppCompatActivity {
         // Fetch and display the recipe details
         if (recipeId != null) {
             fetchRecipeDetails(recipeId);
+        } else {
+            Toast.makeText(this, "Invalid recipe ID", Toast.LENGTH_SHORT).show();
+            finish(); // Close activity if no recipe ID is found
         }
 
-        // Initialize buttons
-        Button buttonEdit = findViewById(R.id.buttonEdit);
-        Button buttonDelete = findViewById(R.id.buttonDelete);
-
         // Set up click listener for the edit button
-        buttonEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Recapidetails.this, EditRecipeActivity.class);
-                intent.putExtra("recipeId", recipeId);
-                startActivity(intent);
-            }
+        buttonEdit.setOnClickListener(v -> {
+            Intent intent = new Intent(Recapidetails.this, EditRecipeActivity.class);
+            intent.putExtra("recipeId", recipeId);
+            startActivity(intent);
         });
 
         // Set up click listener for the delete button
-        buttonDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteRecipe(recipeId);
-            }
-        });
+        buttonDelete.setOnClickListener(v -> deleteRecipe(recipeId));
+
+        // Set up click listener for the share button
+        shareButton.setOnClickListener(v -> shareRecipeDetails());
     }
 
     private void fetchRecipeDetails(String recipeId) {
@@ -87,12 +88,21 @@ public class Recapidetails extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    // Get the recipe details
                     String name = dataSnapshot.child("name").getValue(String.class);
                     String cookingTime = dataSnapshot.child("cookingTime").getValue(String.class);
                     ArrayList<String> ingredients = new ArrayList<>();
                     ArrayList<String> instructions = new ArrayList<>();
-                    String videoUrl = dataSnapshot.child("videoUrl").getValue(String.class); // Get video URL
+                    videoUrl = dataSnapshot.child("videoUrl").getValue(String.class);
+                    String recipeOwnerId = dataSnapshot.child("userId").getValue(String.class);
+
+                    // Check if the current user is the owner of the recipe
+                    if (recipeOwnerId != null && recipeOwnerId.equals(currentUserId)) {
+                        buttonEdit.setVisibility(Button.VISIBLE); // Show Edit button
+                        buttonDelete.setVisibility(Button.VISIBLE); // Show Delete button
+                    } else {
+                        buttonEdit.setVisibility(Button.GONE); // Hide Edit button
+                        buttonDelete.setVisibility(Button.GONE); // Hide Delete button
+                    }
 
                     for (DataSnapshot ingredientSnapshot : dataSnapshot.child("ingredients").getChildren()) {
                         String ingredient = ingredientSnapshot.getValue(String.class);
@@ -108,21 +118,15 @@ public class Recapidetails extends AppCompatActivity {
                         }
                     }
 
-                    // Set the recipe details to TextViews
-                    recipeNameText.setText(name);
-                    recipeCookingTimeText.setText(cookingTime);
+                    // Set recipe details to TextViews
+                    recipeNameText.setText(name != null ? name : "N/A");
+                    recipeCookingTimeText.setText(cookingTime != null ? cookingTime : "N/A");
                     recipeIngredientsText.setText(String.join(", ", ingredients));
                     recipeInstructionsText.setText(String.join("\n", instructions));
 
-                    // Set video to ExoPlayer's PlayerView
+                    // Prepare video playback
                     if (videoUrl != null) {
-                        // Initialize ExoPlayer and set the video
-                        exoPlayer = new ExoPlayer.Builder(Recapidetails.this).build();
-                        playerView.setPlayer(exoPlayer);
-                        MediaItem mediaItem = MediaItem.fromUri(Uri.parse(videoUrl));
-                        exoPlayer.setMediaItem(mediaItem);
-                        exoPlayer.prepare();
-                        exoPlayer.play();
+                        setupPlayer(videoUrl);
                     }
                 } else {
                     Toast.makeText(Recapidetails.this, "Recipe not found", Toast.LENGTH_SHORT).show();
@@ -136,24 +140,52 @@ public class Recapidetails extends AppCompatActivity {
         });
     }
 
+    private void setupPlayer(String videoUrl) {
+        player = new ExoPlayer.Builder(this).build();
+        playerView.setPlayer(player);
+        MediaItem mediaItem = MediaItem.fromUri(Uri.parse(videoUrl));
+        player.setMediaItem(mediaItem);
+        player.prepare();
+        player.play();
+    }
+
     private void deleteRecipe(String recipeId) {
         mDatabase.child(recipeId).removeValue().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                Toast.makeText(Recapidetails.this, "Recipe deleted successfully", Toast.LENGTH_SHORT).show();
-                finish(); // Close this activity and return to the previous one
+                Toast.makeText(Recapidetails.this, "Recipe deleted", Toast.LENGTH_SHORT).show();
+                finish();
             } else {
                 Toast.makeText(Recapidetails.this, "Failed to delete recipe", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
+    private void shareRecipeDetails() {
+        // Create share content
+        String shareContent = "Check out this recipe!\n\n"
+                + "Recipe Name: " + recipeNameText.getText().toString() + "\n"
+                + "Cooking Time: " + recipeCookingTimeText.getText().toString() + "\n"
+                + "Ingredients: " + recipeIngredientsText.getText().toString() + "\n"
+                + "Instructions: " + recipeInstructionsText.getText().toString() + "\n";
+        if (videoUrl != null) {
+            shareContent += "Watch the recipe video: " + videoUrl;
+        }
+
+        // Create share intent
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, shareContent);
+
+        // Start share activity
+        startActivity(Intent.createChooser(shareIntent, "Share Recipe via"));
+    }
+
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        // Release ExoPlayer when done
-        if (exoPlayer != null) {
-            exoPlayer.release();
-            exoPlayer = null;
+    protected void onStop() {
+        super.onStop();
+        if (player != null) {
+            player.release(); // Release the player when activity is stopped
+            player = null;
         }
     }
 }

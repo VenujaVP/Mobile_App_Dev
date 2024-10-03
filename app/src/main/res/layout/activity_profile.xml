@@ -14,7 +14,7 @@
         android:layout_width="380dp"
         android:layout_height="119dp"
         android:background="@drawable/rounded_edittext"
-        android:padding="16dp"
+        android:padding="0dp"
         android:paddingLeft="-50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,8 +26,8 @@
 
         <ImageView
             android:id="@+id/profileImage"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="124dp"
+            android:layout_height="119dp"
             android:background="@drawable/circle_background"
             android:contentDescription="Profile Picture"
             android:scaleType="centerCrop"
@@ -42,6 +42,7 @@
             android:id="@+id/uploadButton"
             android:layout_width="29dp"
             android:layout_height="28dp"
+            android:layout_margin="10dp"
             android:background="@drawable/baseline_camera_al_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -101,40 +102,58 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.532" />
 
-    <ImageView
-        android:id="@+id/homeIcon"
-        android:layout_width="75dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:src="@drawable/home_component"
+        android:layout_gravity="bottom"
+        android:background="#000000"
+        android:backgroundTint="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.074"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.975"
-        app:tint="@color/homeIcon" />
+        app:layout_constraintVertical_bias="1.0">
 
-    <ImageView
-        android:id="@+id/categoryIcon"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:src="@drawable/categories_icon"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.975"
-        app:tint="@color/categoryIconColor" />
+        <ImageView
+            android:id="@+id/homeIcon"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:background="#000000"
+            android:backgroundTint="#000000"
+            android:src="@drawable/home_component"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.047"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/categoryIconColor" />
 
-    <ImageView
-        android:id="@+id/profileIcon"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/profile_component"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:tint="#C82323" />
+        <ImageView
+            android:id="@+id/categoryIcon"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:src="@drawable/categories_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.975"
+            app:tint="@color/categoryIconColor"/>
+
+        <ImageView
+            android:id="@+id/profileIcon"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:src="@drawable/profile_component"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.952"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.975"
+            app:tint="#C82323" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

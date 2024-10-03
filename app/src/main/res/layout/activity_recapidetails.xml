@@ -89,6 +89,17 @@
         app:layout_constraintTop_toBottomOf="@+id/recipeIngredientsText" />
 
     <!-- Edit and Delete Buttons (in LinearLayout) -->
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="224dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="recipeInstructionsText" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -96,7 +107,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recipeInstructionsText">
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar">
 
         <Button
             android:id="@+id/buttonEdit"
@@ -113,5 +124,7 @@
             android:backgroundTint="#C82323"
             android:text="Delete" />
     </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

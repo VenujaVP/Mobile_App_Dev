@@ -149,11 +149,11 @@
         app:layout_constraintTop_toBottomOf="@id/recipeInstructionsText"
         app:layout_constraintVertical_bias="0.0"
         android:numStars="5"
-        android:rating="3"
+        android:stepSize="0.1"
         android:progressTint="#FFD700"
-        android:stepSize="1"
+        android:secondaryProgressTint="@color/white"
         android:progressBackgroundTint="@color/white"
-        />
+        android:isIndicator="true" />
 
     <LinearLayout
         android:id="@+id/linearLayout"

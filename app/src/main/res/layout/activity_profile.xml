@@ -36,7 +36,7 @@
             app:layout_constraintHorizontal_bias="0.056"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.64" />
+            app:layout_constraintVertical_bias="0.48" />
 
         <Button
             android:id="@+id/uploadButton"
@@ -68,7 +68,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/myRecipesButton"
+        android:id="@+id/addRecipesButton"
         android:layout_width="300dp"
         android:layout_height="62dp"
         android:backgroundTint="#FFFFFF"
@@ -87,7 +87,7 @@
         app:layout_constraintVertical_bias="0.354" />
 
     <Button
-        android:id="@+id/savedRecipesButton"
+        android:id="@+id/myRecipesButton"
         android:layout_width="300dp"
         android:layout_height="62dp"
         android:backgroundTint="#FFFFFF"

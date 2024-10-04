@@ -23,11 +23,24 @@
             android:layout_height="wrap_content"
             android:text="Submit Here"
             app:layout_constraintBottom_toBottomOf="parent"
+            android:backgroundTint="#C82323"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.471"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.857" />
+            app:layout_constraintVertical_bias="0.855" />
+
+<!--        <ImageView-->
+<!--            android:id="@+id/backIcon"-->
+<!--            android:layout_width="51dp"-->
+<!--            android:layout_height="53dp"-->
+<!--            android:src="@drawable/baseline_arrow_back_24"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.047"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.045"-->
+<!--            app:tint="@color/white" />-->
 
         <RatingBar
             android:id="@+id/ratingBar2"
@@ -51,7 +64,7 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="hb"
+            android:text="test"
             android:textSize="30sp"
             android:textStyle="bold"
             android:padding="16dp"

@@ -30,23 +30,31 @@ public class profile extends AppCompatActivity {
 
     private TextView displayUsername;
     private ImageView profileImage;
-    private Button uploadButton,myRecipesButton;
+    private Button uploadButton,myRecipesButton,AddRecipesButton;
     private ImageView homeIcon;
     private ImageView categoryIcon;
     private ImageView profileIcon;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private StorageReference mStorage;
+    private String currentUserId;
+    private String recipeId;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+
         // Initialize UI components
         displayUsername = findViewById(R.id.displayUsername);
         profileImage = findViewById(R.id.profileImage);
         uploadButton = findViewById(R.id.uploadButton);
+        AddRecipesButton=findViewById(R.id.addRecipesButton);
         myRecipesButton=findViewById(R.id.myRecipesButton);
         homeIcon=findViewById(R.id.homeIcon);
         categoryIcon=findViewById(R.id.categoryIcon);
@@ -61,7 +69,7 @@ public class profile extends AppCompatActivity {
 
         // Load user data
         loadUserData();
-       myRecipesButton.setOnClickListener(v -> {
+        AddRecipesButton.setOnClickListener(v -> {
             startActivity(new Intent(profile.this, RecipesAdd.class));
         });
         homeIcon.setOnClickListener(v -> {
@@ -76,6 +84,12 @@ public class profile extends AppCompatActivity {
             // Redirect to RegisterActivity
             startActivity(new Intent(profile.this, profile.class));
         });
+        myRecipesButton.setOnClickListener(v -> {
+            Intent intent = new Intent(profile.this, MyRecipes.class);
+            intent.putExtra("recipeId", recipeId);
+            startActivity(intent);
+        });
+
 
     }
 

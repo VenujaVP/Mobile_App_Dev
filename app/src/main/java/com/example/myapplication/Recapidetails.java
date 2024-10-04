@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,9 +28,10 @@ import java.util.ArrayList;
 
 public class Recapidetails extends AppCompatActivity {
 
-    private TextView recipeNameText, recipeCookingTimeText, recipeIngredientsText, recipeInstructionsText,ratingHere;
+    private TextView recipeNameText, recipeCookingTimeText, recipeIngredientsText, recipeInstructionsText, ratingHere;
     private PlayerView playerView;
     private ExoPlayer player;
+    private RatingBar ratingBar;
     private DatabaseReference mDatabase;
     private String recipeId;
     private Button buttonEdit, buttonDelete;
@@ -47,6 +49,7 @@ public class Recapidetails extends AppCompatActivity {
 
         // Initialize views
         recipeNameText = findViewById(R.id.recipeNameText);
+        ratingBar = findViewById(R.id.ratingBar);
         ratingHere = findViewById(R.id.ratingHere);
         recipeCookingTimeText = findViewById(R.id.recipeCookingTimeText);
         recipeIngredientsText = findViewById(R.id.recipeIngredientsText);
@@ -65,6 +68,7 @@ public class Recapidetails extends AppCompatActivity {
         // Fetch and display the recipe details
         if (recipeId != null) {
             fetchRecipeDetails(recipeId);
+            fetchAverageRating(); // Fetch and display average rating
         } else {
             Toast.makeText(this, "Invalid recipe ID", Toast.LENGTH_SHORT).show();
             finish(); // Close activity if no recipe ID is found
@@ -78,7 +82,9 @@ public class Recapidetails extends AppCompatActivity {
         });
 
         ratingHere.setOnClickListener(v -> {
-            startActivity(new Intent(Recapidetails.this, RatingPage.class));
+            Intent intent = new Intent(Recapidetails.this, RatingPage.class);
+            intent.putExtra("recipeId", recipeId);
+            startActivity(intent);
         });
 
         // Set up click listener for the delete button
@@ -144,6 +150,51 @@ public class Recapidetails extends AppCompatActivity {
             }
         });
     }
+
+    private void fetchAverageRating() {
+        // Reference to the ratings for the specific recipe
+        DatabaseReference ratingsRef = mDatabase.child(recipeId).child("ratings");
+
+        ratingsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    float totalRating = 0;
+                    int ratingCount = 0;
+
+                    // Loop through all the ratings to calculate the total and count
+                    for (DataSnapshot ratingSnapshot : dataSnapshot.getChildren()) {
+                        Float rating = ratingSnapshot.getValue(Float.class);
+                        if (rating != null) {
+                            totalRating += rating;
+                            ratingCount++;
+                        }
+                    }
+
+                    // Calculate the average rating
+                    float averageRating = (ratingCount > 0) ? totalRating / ratingCount : 0;
+
+                    // Update the RatingBar with the average rating
+                    ratingBar.setRating(averageRating);
+
+                    // Display the average rating as text
+                    ratingHere.setText(String.format("Average Rating: %.1f (%d ratings)", averageRating, ratingCount));
+
+                } else {
+                    // Handle case when there are no ratings
+                    ratingHere.setText("No ratings yet");
+                    ratingBar.setRating(0);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(Recapidetails.this, "Failed to load average rating", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
 
     private void setupPlayer(String videoUrl) {
         player = new ExoPlayer.Builder(this).build();

@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import java.util.List;
 
 public class CustomRecipeAdapter extends RecyclerView.Adapter<CustomRecipeAdapter.RecipeViewHolder> {
@@ -38,11 +40,23 @@ public class CustomRecipeAdapter extends RecyclerView.Adapter<CustomRecipeAdapte
                 .load(recipe.getImageUrl())
                 .into(holder.recipeImage);
 
-        // Set the recipe name
+        // Set the recipe name and cooking time
         holder.recipeName.setText(recipe.getName());
-
-        // Set the cooking time
         holder.cookingTime.setText(recipe.getCookingTime());
+
+        // Set favorite icon based on isFavorite status
+        holder.favourite.setImageResource(recipe.isFavorite() ? R.drawable.baseline_favorite_24 : R.drawable.baseline_favorite_border_24);
+
+        // Set onClickListener for the favorite icon
+        holder.favourite.setOnClickListener(v -> {
+            boolean newFavoriteStatus = !recipe.isFavorite();
+            recipe.setFavorite(newFavoriteStatus); // Update favorite status
+            holder.favourite.setImageResource(newFavoriteStatus ? R.drawable.baseline_favorite_24 : R.drawable.baseline_favorite_border_24);
+
+            // Update the favorite status in Firebase
+            DatabaseReference recipeRef = FirebaseDatabase.getInstance().getReference("recipes").child(recipe.getRecipeId());
+            recipeRef.child("isFavorite").setValue(newFavoriteStatus);
+        });
 
         // Set onClickListener to navigate to RecipeDetails
         holder.itemView.setOnClickListener(v -> {
@@ -65,12 +79,14 @@ public class CustomRecipeAdapter extends RecyclerView.Adapter<CustomRecipeAdapte
 
     static class RecipeViewHolder extends RecyclerView.ViewHolder {
         ImageView recipeImage;
+        ImageView favourite; // Add reference to favourite ImageView
         TextView recipeName;
         TextView cookingTime;
 
         public RecipeViewHolder(@NonNull View itemView) {
             super(itemView);
             recipeImage = itemView.findViewById(R.id.recipeImage);
+            favourite = itemView.findViewById(R.id.favourite); // Initialize favourite ImageView
             recipeName = itemView.findViewById(R.id.recipeName);
             cookingTime = itemView.findViewById(R.id.cookingTime);
         }

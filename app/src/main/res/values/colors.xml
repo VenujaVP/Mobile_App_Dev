@@ -10,5 +10,6 @@
     <color name="homeIcon">#FFFFFFFF</color> <!-- Example orange color -->
     <color name="categoryIconColor">#FFFFFFFF</color> <!-- Example green color -->
     <color name="profileIcon">#FFFFFFFF</color> <!-- Example blue color -->
-    <color name="baseline_camera_al_24">#FFFFFFFF</color> <!-- Example blue color -->
+    <color name="baseline_camera_al_24">#FFFFFFFF</color>
+    <!-- Example blue color -->
 </resources>

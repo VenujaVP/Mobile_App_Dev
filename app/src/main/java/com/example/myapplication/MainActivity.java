@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Set click listeners for icons
         homeIcon.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, MainActivity.class)));
-        categoryIcon.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, category.class)));
+        categoryIcon.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, Favouurite.class)));
         profileIcon.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, profile.class)));
     }
 

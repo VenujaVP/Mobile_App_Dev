@@ -14,14 +14,13 @@
         <ImageView
             android:id="@+id/recipeImage"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="222dp"
             android:background="@drawable/baseline_image_24"
-            android:scaleType="centerCrop"
-            />
+            android:scaleType="centerCrop" />
 
         <Button
             android:id="@+id/uploadImageButton"
-            android:backgroundTint="#FF0000"
+            android:backgroundTint="#7A7A7A"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Upload Recipe Image"/>
@@ -45,18 +44,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter cooking time (e.g., 30 minutes)"
+            android:background="@drawable/rounded_edittext"
             android:textSize="16sp"
             android:padding="10dp"
             android:inputType="number"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"/>
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"/>
 
         <!-- Video Upload Button -->
         <Button
             android:id="@+id/uploadVideoButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#FF0000"
+            android:backgroundTint="#7A7A7A"
             android:text="Upload Recipe Video"/>
 
         <!-- Ingredients Container -->
@@ -85,7 +85,7 @@
             android:id="@+id/addIngredientButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#FF0000"
+            android:backgroundTint="#7A7A7A"
             android:text="Add Another Ingredient"/>
 
         <!-- Instructions Container -->
@@ -99,33 +99,35 @@
             <EditText
                 android:id="@+id/instructionStep1"
                 android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/rounded_edittext"
                 android:hint="Enter step 1"
                 android:inputType="textMultiLine"
-                android:background="@drawable/rounded_edittext"
-                android:layout_height="65dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
+                android:minLines="3"
                 android:paddingLeft="12dp"
-                android:minLines="3"/>
+                android:textColor="@color/black"
+                android:textColorHint="@color/black" />
 
         </LinearLayout>
 
         <!-- Add Instruction Button -->
+
+        <!-- Submit Button -->
+
         <Button
             android:id="@+id/addInstructionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#FF0000"
-            android:text="Add Another Step"/>
+            android:backgroundTint="#7A7A7A"
+            android:text="Add Another Step" />
 
-        <!-- Submit Button -->
         <Button
             android:id="@+id/submitRecipeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#FF0000"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="125dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginLeft="121dp"
             android:text="Submit Recipe"/>
 
     </LinearLayout>

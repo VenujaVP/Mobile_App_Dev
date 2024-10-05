@@ -33,19 +33,18 @@
             android:text="Recipe Name"
             android:textColor="@color/white"
             android:layout_marginBottom="5dp"/>
-
         <EditText
             android:id="@+id/recipeNameInput"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/rounded_edittext"
             android:hint="Enter recipe name"
-            android:padding="10dp"
-            android:paddingLeft="12dp"
+            android:background="@drawable/rounded_edittext"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
-            android:textSize="16sp" />
+            android:layout_height="48dp"
+            android:paddingLeft="12dp"
+            android:textSize="16sp"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,16 +55,16 @@
         <EditText
             android:id="@+id/cookingTimeInput"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/rounded_edittext"
             android:hint="Enter cooking time (e.g., 30 minutes)"
-            android:inputType="number"
-            android:padding="10dp"
-            android:paddingLeft="12dp"
+            android:textSize="16sp"
+            android:background="@drawable/rounded_edittext"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
-            android:textSize="16sp" />
+            android:layout_height="48dp"
+            android:paddingLeft="12dp"
+            android:padding="10dp"
+            android:inputType="number"
+            android:layout_marginBottom="10dp"/>
 
         <!-- Video Upload Button -->
         <Button
@@ -88,14 +87,14 @@
             <EditText
                 android:id="@+id/ingredientInput1"
                 android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/rounded_edittext"
                 android:hint="Enter ingredient"
-                android:inputType="text"
-                android:paddingLeft="12dp"
+                android:background="@drawable/rounded_edittext"
                 android:textColor="@color/black"
-                android:textColorHint="@color/black" />
+                android:textColorHint="@color/black"
+                android:layout_height="48dp"
+                android:paddingLeft="12dp"
+                android:inputType="text"
+                android:layout_marginBottom="10dp"/>
 
         </LinearLayout>
 
@@ -119,15 +118,15 @@
             <EditText
                 android:id="@+id/instructionStep1"
                 android:layout_width="match_parent"
-                android:layout_height="39dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/rounded_edittext"
                 android:hint="Enter step 1"
                 android:inputType="textMultiLine"
-                android:minLines="3"
                 android:paddingLeft="12dp"
+                android:background="@drawable/rounded_edittext"
+                android:layout_height="65dp"
+                android:minLines="3"
                 android:textColor="@color/white"
-                android:textColorHint="@color/black" />
+                android:textColorHint="@color/black"
+                android:layout_marginBottom="10dp"/>
 
         </LinearLayout>
 
@@ -145,7 +144,7 @@
             android:id="@+id/submitRecipeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#7C7B7B"
+            android:backgroundTint="#FF0000"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="125dp"
             android:text="Submit Recipe"/>

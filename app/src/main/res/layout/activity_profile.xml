@@ -43,13 +43,13 @@
             android:layout_width="29dp"
             android:layout_height="28dp"
             android:layout_margin="10dp"
-            android:background="@drawable/baseline_camera_al_24"
+            android:background="@android:drawable/ic_menu_camera"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.319"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/displayUsername"
@@ -60,10 +60,10 @@
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.605"
+            app:layout_constraintHorizontal_bias="0.674"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.474" />
+            app:layout_constraintVertical_bias="0.494" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -74,33 +74,35 @@
         android:backgroundTint="#FFFFFF"
         android:drawableLeft="@drawable/baseline_library_add_24"
         android:drawablePadding="10dp"
+        android:paddingRight="60dp"
         android:text="Add Recipes"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textColorLink="@color/black"
         android:textSize="16sp"
-        android:paddingRight="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.354" />
+        app:layout_constraintVertical_bias="0.448" />
 
     <Button
         android:id="@+id/myRecipesButton"
         android:layout_width="300dp"
         android:layout_height="62dp"
         android:backgroundTint="#FFFFFF"
+        android:drawableLeft="@drawable/fastfood"
+        android:paddingRight="60dp"
         android:text="My Recipes"
         android:textColor="#000000"
-        android:drawableLeft="@drawable/fastfood"
         android:textSize="16sp"
-        android:paddingRight="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.532" />
+        app:layout_constraintVertical_bias="0.566" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

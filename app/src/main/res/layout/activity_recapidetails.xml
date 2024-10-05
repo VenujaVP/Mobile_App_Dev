@@ -13,17 +13,17 @@
     <!-- Recipe Name -->
     <ImageView
         android:id="@+id/shareButton"
-        android:layout_width="43dp"
-        android:layout_height="43dp"
+        android:layout_width="23dp"
+        android:layout_height="39dp"
         android:contentDescription="Share"
         android:src="@drawable/baseline_share_24"
-        app:tint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        app:tint="@color/white" />
 
     <TextView
         android:id="@+id/recipeNameText"
@@ -127,12 +127,12 @@
         android:id="@+id/recipeInstructionsText"
         android:layout_width="365dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:text="Instructions"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintHorizontal_bias="0.785"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 

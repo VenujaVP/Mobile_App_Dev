@@ -10,8 +10,8 @@
     <!-- Share Button -->
     <ImageView
         android:id="@+id/shareButton"
-        android:layout_width="27dp"
-        android:layout_height="28dp"
+        android:layout_width="23dp"
+        android:layout_height="24dp"
         android:contentDescription="Share"
         android:src="@drawable/baseline_share_24"
         app:layout_constraintEnd_toEndOf="parent"

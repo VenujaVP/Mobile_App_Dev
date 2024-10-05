@@ -163,7 +163,7 @@ public class RecipesAdd extends AppCompatActivity {
                             }
 
                             String recipeId = mDatabase.push().getKey();
-                            Recipe recipe = new Recipe(recipeId, userId, recipeName, cookingTime, ingredientsList, instructionsList, imageUrl.toString(), videoUrl.toString());
+                            Recipe recipe = new Recipe(recipeId, userId, recipeName, cookingTime, ingredientsList, instructionsList, imageUrl.toString(), videoUrl.toString(), false); // Pass false for isFavorite
 
                             if (recipeId != null) {
                                 mDatabase.child(recipeId).setValue(recipe).addOnCompleteListener(task -> {

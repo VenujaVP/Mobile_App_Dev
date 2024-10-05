@@ -54,7 +54,6 @@
             app:layout_constraintVertical_bias="0.48"
 
             android:numStars="5"
-            android:rating="3"
             android:progressTint="#FFD700"
             android:stepSize="1"
             android:progressBackgroundTint="@color/white"
